@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: show-time
+  namespace: default
+  labels:
+    app: show-time
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: show-time
+  template:
+    metadata:
+      labels:
+        app: show-time
+    spec:
+      containers:
+      - name: show-time
+        image: werta/show-time:show-time
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8989
+        livenessProbe:
+          httpGet:
+
+            port: 8989
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 2

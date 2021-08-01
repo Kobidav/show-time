@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: show-time
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    app: show-time
+  ports:
+    - port: 8989
+      targetPort: 8989
